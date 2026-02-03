@@ -22,10 +22,25 @@ signal piece_selected(piece_data: PieceData, grid_pos: Vector2i)
 ## @param to_pos: Vector2i - 目标位置
 signal move_requested(from_pos: Vector2i, to_pos: Vector2i)
 
+## 棋盘网格点击
+## @param pos: Vector2i - 点击的网格坐标
+signal grid_clicked(pos: Vector2i)
+
+## 更新高亮显示
+## @param selected_pos: Vector2i - 当前选中的棋子位置
+## @param legal_moves: Array[Vector2i] - 合法移动目标位置列表
+signal update_highlights(selected_pos: Vector2i, legal_moves: Array[Vector2i])
+
+## 清除高亮显示
+signal clear_highlights()
+
 ## 走棋执行完成 (逻辑层验证通过后发出)
 ## @param from_pos: Vector2i - 起始位置
 ## @param to_pos: Vector2i - 目标位置
 signal move_executed(from_pos: Vector2i, to_pos: Vector2i)
+
+## 移动动画完成
+signal animation_finished()
 
 # ============================================================================
 # 游戏状态信号
@@ -51,7 +66,15 @@ signal game_over(winner: Constants.Side)
 signal piece_deselected()
 
 ## 悔棋执行
-signal move_undone()
+signal undo_executed()
+
+## 棋盘刷新 (用于悔棋后重绘)
+## @param board_logic: BoardLogic - 棋盘逻辑对象
+signal board_refreshed(board_logic)
+
+## 历史记录更新
+## @param move_notation: String - 走棋记谱文本
+signal history_updated(move_notation: String)
 
 ## 新游戏开始
 signal game_started()

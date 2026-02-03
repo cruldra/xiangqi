@@ -18,17 +18,17 @@ func _init():
 	_setup_board()
 
 ## 初始化棋盘数组
-#	1 2 3 4 5 6 7 8 9
-#1 ┌─┬─┬─┬─┬─┬─┬─┬─┬─┐
-#2 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#3 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#4 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#5 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#6 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#7 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#8 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#9 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
-#0 └─┴─┴─┴─┴─┴─┴─┴─┴─┘
+##	1 2 3 4 5 6 7 8 9
+##1 ┌─┬─┬─┬─┬─┬─┬─┬─┬─┐
+##2 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##3 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##4 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##5 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##6 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##7 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##8 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##9 ├─┼─┼─┼─┼─┼─┼─┼─┼─┤
+##0 └─┴─┴─┴─┴─┴─┴─┴─┴─┘
 func _setup_board():
 	board.clear()
 	for x in range(Constants.BOARD_COLS):
@@ -75,12 +75,15 @@ func move_piece(from: Vector2i, to: Vector2i) -> PieceData:
 	var captured_piece: PieceData = get_piece_at(to)
 
 	# 记录历史 (简单记录，后续可扩展为专门的 Move 对象)
+	var move_name = NotationGenerator.get_move_name(self, from, to)
+
 	var move_record: Dictionary[Variant, Variant] = {
 		"from": from,
 		"to": to,
 		"piece": piece.clone(),
 		"captured": captured_piece.clone() if captured_piece else null,
-		"turn": current_turn
+		"turn": current_turn,
+		"name": move_name
 	}
 	move_history.append(move_record)
 

@@ -50,8 +50,10 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 
 ## 播放移动动画
 ## @param target_pos: Vector2 - 目标像素坐标
-func animate_move(target_pos: Vector2):
+## @return Tween - 动画对象
+func animate_move(target_pos: Vector2) -> Tween:
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "position", target_pos, 0.3)
+	return tween

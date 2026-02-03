@@ -69,7 +69,7 @@ const PIECE_CHARACTERS = {
 
 ## 游戏初始布局配置
 ## 使用字典数组存储，包含位置(Vector2i)、阵营和类型
-const INITIAL_LAYOUT = [
+const INITIAL_LAYOUT: Array[Variant] = [
 	# --- 黑方 (顶部) ---
 	{"pos": Vector2i(0, 0), "side": Side.BLACK, "type": PieceType.CHARIOT}, # 车
 	{"pos": Vector2i(1, 0), "side": Side.BLACK, "type": PieceType.HORSE},   # 马

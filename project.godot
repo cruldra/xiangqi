@@ -18,10 +18,24 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventBus="*res://autoload/event_bus.gd"
+GameManager="*res://scripts/game_manager.gd"
+AudioManager="*res://autoload/audio_manager.gd"
+
+[display]
+
+window/size/viewport_height=1152
 
 [dotnet]
 
 project/assembly_name="xiangqi"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[gui]
+
+theme/custom="res://assets/themes/game_theme.tres"
 
 [physics]
 
@@ -30,7 +44,3 @@ project/assembly_name="xiangqi"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-
-[gui]
-
-theme/custom="res://assets/themes/game_theme.tres"
