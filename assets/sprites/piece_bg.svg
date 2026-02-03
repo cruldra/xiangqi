@@ -1,0 +1,21 @@
+<svg width="72" height="72" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="1" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Main Body with Shadow -->
+  <circle cx="36" cy="36" r="34" fill="#eac470" stroke="#5c4033" stroke-width="2" filter="url(#shadow)" />
+  <!-- Inner Decorative Ring -->
+  <circle cx="36" cy="36" r="29" fill="none" stroke="#5c4033" stroke-width="1.5" />
+  <!-- Bevel Highlight (Top Left) -->
+  <path d="M 15 36 A 21 21 0 0 1 36 15" stroke="white" stroke-width="2" fill="none" opacity="0.4" />
+</svg>

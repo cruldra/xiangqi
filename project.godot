@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="xiangqi"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://autoload/event_bus.gd"
 
 [dotnet]
 
@@ -25,3 +30,7 @@ project/assembly_name="xiangqi"
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
+[gui]
+
+theme/custom="res://assets/themes/game_theme.tres"
