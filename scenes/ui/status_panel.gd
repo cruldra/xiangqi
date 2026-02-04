@@ -1,4 +1,4 @@
-extends Control
+extends PanelContainer
 
 @onready var turn_label: Label = $VBoxContainer/TurnLabel
 @onready var check_label: Label = $VBoxContainer/CheckLabel

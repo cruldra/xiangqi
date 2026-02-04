@@ -96,6 +96,9 @@ func move_piece(from: Vector2i, to: Vector2i) -> PieceData:
 
 	return captured_piece
 
+## 判断游戏是否结束 (属性)
+var is_game_over: bool = false
+
 ## 切换回合
 func switch_turn():
 	current_turn = Constants.Side.BLACK if current_turn == Constants.Side.RED else Constants.Side.RED

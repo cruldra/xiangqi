@@ -78,3 +78,9 @@ signal history_updated(move_notation: String)
 
 ## 新游戏开始
 signal game_started()
+
+## 请求暂停 (显示暂停菜单)
+signal pause_requested()
+
+## 请求返回主菜单
+signal return_to_menu_requested()

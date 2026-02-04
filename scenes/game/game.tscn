@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://der47ykw1xcgc"]
+
+[ext_resource type="Script" uid="uid://cay635hmrglne" path="res://scenes/game/game.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b7k7yi1u07tdj" path="res://scenes/board/board.tscn" id="2_board"]
+[ext_resource type="PackedScene" path="res://scenes/ui/game_ui.tscn" id="3_ui"]
+
+[node name="Game" type="Node2D" unique_id=1532543595]
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1033012954]
+offset_right = 1280.0
+offset_bottom = 900.0
+mouse_filter = 2
+color = Color(0.15, 0.09, 0.045, 1)
+
+[node name="Board" parent="." unique_id=677928714 instance=ExtResource("2_board")]
+position = Vector2(132, 66)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=462050543]
+
+[node name="GameUI" parent="CanvasLayer" unique_id=420472181 instance=ExtResource("3_ui")]

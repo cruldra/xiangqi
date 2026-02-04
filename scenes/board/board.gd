@@ -9,7 +9,7 @@ extends Node2D
 const PIECE_SCENE: PackedScene = preload("res://scenes/pieces/piece.tscn")
 
 ## 棋盘格大小 (像素)
-@export var cell_size: float = 80.0:
+@export var cell_size: float = 72.0:
 	set(v):
 		cell_size= v
 		queue_redraw()

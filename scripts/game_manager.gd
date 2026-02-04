@@ -9,9 +9,11 @@ var board_logic: BoardLogic
 
 ## 当前选中的棋子位置 (-1,-1 表示未选中)
 var selected_pos: Vector2i = Vector2i(-1, -1)
-
 ##	是否正在播放动画，锁定输入
 var is_animating: bool = false
+# AI Settings
+var is_vs_ai_mode: bool = true # 默认为人机模式
+var ai_side: Constants.Side = Constants.Side.BLACK # AI 执黑
 
 func _ready():
 	# 初始化逻辑层
@@ -31,9 +33,9 @@ func start_new_game():
 	is_animating = false
 	EventBus.game_started.emit()
 	AudioManager.play_move() # Play sound on start
-	# 通知视图层刷新 (通常由 Main 场景调用 Board.spawn_pieces)
 
-## 处理棋子被选中事件
+	# 检查是否该 AI 走棋 (例如 AI 执红)
+	_check_ai_turn()
 func _on_piece_selected(piece_data: PieceData, pos: Vector2i) -> void:
 	if is_animating:
 		return
@@ -57,6 +59,50 @@ func _on_grid_clicked(pos: Vector2i) -> void:
 ## 动画结束回调
 func _on_animation_finished():
 	is_animating = false
+	# 动画结束后，检查是否轮到 AI
+	_check_ai_turn()
+
+## 检查并执行 AI 走棋
+func _check_ai_turn():
+	# 如果是 AI 模式且轮到 AI 走棋
+	if is_vs_ai_mode and _is_ai_turn():
+		# 避免在游戏结束时继续走棋
+		if board_logic.is_game_over:
+			return
+
+		# 延迟一点调用，模拟思考并避免逻辑冲突
+		# 创建一个临时的 Timer
+		var timer: SceneTreeTimer = get_tree().create_timer(0.5)
+		timer.timeout.connect(_perform_ai_move)
+
+## 执行 AI 思考和走棋
+func _perform_ai_move():
+	# 再次检查，防止 Timer 触发时状态已变 (如玩家悔棋/重开)
+	if not _is_ai_turn() or board_logic.is_game_over:
+		return
+
+	print("[AI] Thinking...")
+	# 在主线程执行 (深度3通常很快，若卡顿需移至 Thread)
+	var best_move = AIEngine.get_best_move(board_logic, ai_side)
+
+	if best_move:
+		print("[AI] Best move: ", best_move["from"], " -> ", best_move["to"])
+
+		# 为了视觉效果，先选中棋子
+		selected_pos = best_move["from"]
+		# 显示高亮 (可选，让玩家看到 AI 选了啥)
+		# var moves = MoveGenerator.get_valid_moves(board_logic, selected_pos)
+		# EventBus.update_highlights.emit(selected_pos, moves)
+
+		# 执行移动
+		_execute_move(best_move["to"])
+	else:
+		print("[AI] No valid moves found! (Surrender)")
+		# AI 认输或困毙，通常 CheckDetector 会处理胜负，这里只需打印
+
+## 判断当前是否为 AI 回合
+func _is_ai_turn() -> bool:
+	return board_logic.current_turn == ai_side
 
 ## 选中棋子并显示走法
 func _select_piece(pos: Vector2i):

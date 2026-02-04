@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="xiangqi"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,10 +20,13 @@ config/icon="res://icon.svg"
 EventBus="*res://autoload/event_bus.gd"
 GameManager="*res://scripts/game_manager.gd"
 AudioManager="*res://autoload/audio_manager.gd"
+SceneManager="*res://autoload/scene_manager.gd"
 
 [display]
 
-window/size/viewport_height=1152
+window/size/viewport_width=1280
+window/size/viewport_height=900
+window/stretch/mode="canvas_items"
 
 [dotnet]
 

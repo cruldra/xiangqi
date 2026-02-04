@@ -1,4 +1,4 @@
-extends Panel
+extends PanelContainer
 
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var moves_container: VBoxContainer = $ScrollContainer/MovesContainer
